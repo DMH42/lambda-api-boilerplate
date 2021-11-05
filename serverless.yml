@@ -1,0 +1,55 @@
+service: api
+plugins:
+  - serverless-offline
+  # - serverless-aws-static-file-handler/plugins/BinaryMediaTypes
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${env:STAGE}
+  region: us-east-2
+
+# custom:
+#   apiGateway:
+#     binaryMediaTypes:
+#       - "image/png"
+#       - "image/jpeg"
+#       - "image/jpg"
+#       - "application/pdf"
+#       - "multipart/form-data"
+
+functions:
+  notion:
+    handler: lambda.handler
+    events:
+      - http:
+          path: /
+          method: any
+          cors: true
+          # authorizer: 
+          #   arn: ${env:AWS_COGNITO_ARN}
+      - http:
+          path: /{proxy+}
+          method: any
+          cors: true
+          # authorizer: 
+          #   arn: ${env:AWS_COGNITO_ARN}
+      # - http:
+      #     path: /route/and/path/{proxy+}
+      #     method: any
+      #     cors:
+      #       origin: '*'
+      #       headers:
+      #         - Content-Type
+      #         - X-Amz-Date
+      #         - Authorization
+      #         - X-Api-Key
+      #         - X-Amz-Security-Token
+      #         - X-Amz-User-Agent
+      #         - x-flowlie-auth
+      #       allowCredentials: false
+
+      
+resources:
+  # API Gateway Errors
+  - ${file(api-gateway-errors.yml)}
