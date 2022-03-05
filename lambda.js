@@ -1,5 +1,5 @@
 const serverless = require('serverless-http');
-const load = require('./build/api/src/app'); //TODO change this
+const load = require('./build/app'); //TODO change this
 
 const app = load.default;
 
