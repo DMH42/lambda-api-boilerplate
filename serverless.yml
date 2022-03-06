@@ -6,7 +6,8 @@ plugins:
 provider:
   name: aws
   runtime: nodejs14.x
-  stage: ${env:STAGE}
+  # stage: ${env:STAGE}
+  stage: test #change this to change the stage of deployment
   region: us-east-2
 
 # custom:
@@ -19,7 +20,7 @@ provider:
 #       - "multipart/form-data"
 
 functions:
-  notion:
+  API:
     handler: lambda.handler
     events:
       - http:
@@ -51,5 +52,5 @@ functions:
 
       
 resources:
-  # API Gateway Errors
+# API Gateway Errors
   - ${file(api-gateway-errors.yml)}
