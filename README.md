@@ -1,5 +1,5 @@
-# lambda-api-boilerplate
-A boilerplate for a lambda api with a express backend
+# Lambda REST API Boilerplate Using Express
+A boilerplate for a lambda api with an express backend
 
 
 Requirements:
